@@ -39,7 +39,7 @@ public class CircusGameWindow extends JFrame implements Node{
     private void performAction(){
         JOptionPane.showMessageDialog(null, "Game is starting!");
         setVisible(false);
-        DifficultySelector difficultySelector = new DifficultySelector();
+        DifficultySelector difficultySelector = DifficultySelector.getDifficultySelector();
         difficultySelector.setVisible(true);
         difficultySelector.setParentNode(this);
     }

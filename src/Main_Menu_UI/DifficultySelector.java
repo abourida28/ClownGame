@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 public class DifficultySelector extends JFrame implements Node {
+
+    static DifficultySelector difficultySelector = null;
     private JButton easyButton;
     private JButton mediumButton;
     private JButton hardButton;
@@ -15,7 +17,7 @@ public class DifficultySelector extends JFrame implements Node {
 
     private Node parent;
 
-    public DifficultySelector() {
+    private DifficultySelector() {
         setTitle("Difficulty");
         setResizable(false);
         setSize(500, 480);
@@ -51,6 +53,12 @@ public class DifficultySelector extends JFrame implements Node {
         });
         backgroundLabel.add(backButton);
         setVisible(true);
+    }
+
+    public static DifficultySelector getDifficultySelector(){
+        if (difficultySelector == null)
+            difficultySelector =  new DifficultySelector();
+        return difficultySelector;
     }
 
     private void getBack(){
