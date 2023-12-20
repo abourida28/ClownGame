@@ -3,7 +3,7 @@ import eg.edu.alexu.csd.oop.game.World;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
-
+import GameBackEnd.Clown;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
 public abstract class Worldimpl implements World {
@@ -21,10 +21,12 @@ public abstract class Worldimpl implements World {
         width = screenWidth;
         height = screenHeight;
         for(int i=0; i<2; i++) {
-            control.add(new Clown(screenWidth*5/11, screenHeight*i/8, 90, true, Color.BLUE));
+            //Mesh fahem eh el 90 dy
+            control.add(new Clown(screenWidth*5/11, screenHeight*i/8,  true, Color.BLUE));
         }
         for(int i=0;i<10;i++) {
-            moving.add(new Shape());
+            //dh new Shape() interface
+//            moving.add(new Shape());
         }
 
     }
