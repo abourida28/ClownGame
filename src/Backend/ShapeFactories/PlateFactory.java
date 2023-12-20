@@ -1,4 +1,7 @@
-package Shapes;
+package Backend.ShapeFactories;
+
+import Backend.Objects.Plate;
+import Backend.Objects.Shape;
 
 public class PlateFactory implements ShapeFactory {
     //private final String imagePath;

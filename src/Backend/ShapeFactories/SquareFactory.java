@@ -1,6 +1,10 @@
-package Shapes;
+package Backend.ShapeFactories;
 
-public class SquareFactory implements ShapeFactory{
+import Backend.Objects.Shape;
+import Backend.Objects.Square;
+import Backend.ShapeFactories.ShapeFactory;
+
+public class SquareFactory implements ShapeFactory {
     @Override
     public Shape createShape(int Posx, int Posy) {
         return null;

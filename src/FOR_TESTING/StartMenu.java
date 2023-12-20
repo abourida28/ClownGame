@@ -1,3 +1,5 @@
+package FOR_TESTING;
+
 import javax.swing.*;
 
 public class StartMenu extends javax.swing.JFrame {

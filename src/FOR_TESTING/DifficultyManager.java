@@ -1,7 +1,8 @@
-package Shapes;
+package FOR_TESTING;
+
+import Backend.ShapeFactories.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DifficultyManager {
     public static ArrayList<ShapeFactory> getEasyDifficultyFactories() {

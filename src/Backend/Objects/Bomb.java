@@ -1,4 +1,4 @@
-package Shapes;
+package Backend.Objects;
 
 import eg.edu.alexu.csd.oop.game.World;
 
@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Knife implements Shape{
+public class Bomb implements Shape{
     private static final int MAX_MSTATE = 1;
     // an array of sprite images that are drawn sequentially
     private BufferedImage[] spriteImages = new BufferedImage[MAX_MSTATE];
@@ -18,17 +18,19 @@ public class Knife implements Shape{
     private int speed;
 
 
-    public Knife(int posX, int posY) {
+    public Bomb(int posX, int posY) {
         this.x = posX;
         this.y = posY;
         this.visible = true;
         // create a bunch of buffered images and place into an array, to be displayed sequentially
         try {
-            spriteImages[0] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("images/knife.png")));
+            spriteImages[0] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("images/bomb.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+
 
     @Override
     public void fall(World balloonWorld) {
@@ -40,22 +42,22 @@ public class Knife implements Shape{
             this.setX((int) (Math.random() * balloonWorld.getWidth()));
         }
     }
-
-
+    @Override
     public int getFallingSpeed() {
         return this.speed;
     }
+
+//    @Override
+//    public Shape createShape() {
+//        // Create a new Plate with the same attributes
+//        return new Bomb(getX(), getY());
+//    }
 
     @Override
     public void setFallingSpeed(int speed) {
         this.speed = speed;
     }
 
-//    @Override
-//    public Shape createShape() {
-//        // Create a new Plate with the same attributes
-//        return new Knife(getX(), getY());
-//    }
 
     @Override
     public int getX() {

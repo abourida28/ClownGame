@@ -1,7 +1,10 @@
+package FOR_TESTING;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import Shapes.*;
+import Backend.Objects.Shape;
+import Backend.RandomShapeGenerator;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 

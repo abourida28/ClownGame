@@ -1,4 +1,4 @@
-package Main_Menu_UI;
+package Frontend;
 
 import javax.swing.*;
 import java.awt.*;

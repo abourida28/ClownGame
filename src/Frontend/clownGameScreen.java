@@ -1,4 +1,4 @@
-package Main_Menu_UI;
+package Frontend;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
