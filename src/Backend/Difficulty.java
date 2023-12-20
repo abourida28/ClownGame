@@ -1,4 +1,4 @@
-package GameBackEnd;
+package Backend;
 import eg.edu.alexu.csd.oop.game.World;
 public interface Difficulty {
     public void setShapeSpeed(int shapeSpeed);

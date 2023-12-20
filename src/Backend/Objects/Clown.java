@@ -1,4 +1,4 @@
-package GameBackEnd;
+package Backend.Objects;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.io.File;

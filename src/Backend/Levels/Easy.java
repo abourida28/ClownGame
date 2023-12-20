@@ -1,4 +1,6 @@
 package Backend.Levels;
 
-public class Easy {
+import Backend.Difficulty;
+
+public class Easy implements Difficulty {
 }

@@ -1,12 +1,14 @@
+package Backend;
+
 import eg.edu.alexu.csd.oop.game.World;
 
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
-import GameBackEnd.Clown;
+import Backend.Objects.Clown;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
-public abstract class Worldimpl implements World {
+public class Worldimpl implements World {
 
     private int score = 0;
     private static int MAX_Time = 60*1000;
@@ -31,4 +33,48 @@ public abstract class Worldimpl implements World {
 
     }
 
+    @Override
+    public List<GameObject> getConstantObjects() {
+        return null;
+    }
+
+    @Override
+    public List<GameObject> getMovableObjects() {
+        return null;
+    }
+
+    @Override
+    public List<GameObject> getControlableObjects() {
+        return null;
+    }
+
+    @Override
+    public int getWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getHeight() {
+        return 0;
+    }
+
+    @Override
+    public boolean refresh() {
+        return false;
+    }
+
+    @Override
+    public String getStatus() {
+        return null;
+    }
+
+    @Override
+    public int getSpeed() {
+        return 0;
+    }
+
+    @Override
+    public int getControlSpeed() {
+        return 0;
+    }
 }
