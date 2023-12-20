@@ -2,14 +2,10 @@ package Main_Menu_UI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class CircusGameWindow extends JFrame implements Node{
-    private JButton startButton;
-    private JButton exitButton;
+public class mainMenuWindow extends JFrame implements Node{
 
-    public CircusGameWindow() {
+    public mainMenuWindow() {
         setTitle("Circus Game");
         setResizable(false);
         setSize(500, 400);
@@ -21,14 +17,14 @@ public class CircusGameWindow extends JFrame implements Node{
         add(backgroundLabel, BorderLayout.CENTER);
         backgroundLabel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 100)); // Added gaps
 
-        startButton = CommonUsedUtils.createStyledButton("Start",(Void) -> {
+        JButton startButton = CommonUsedUtils.createStyledButton("Start", (Void) -> {
             performAction();
             return null;
         });
         backgroundLabel.add(startButton);
 
 
-        exitButton = CommonUsedUtils.createStyledButton("Exit",(Void) -> {
+        JButton exitButton = CommonUsedUtils.createStyledButton("Exit", (Void) -> {
             System.exit(0);
             return null;
         });
@@ -37,6 +33,7 @@ public class CircusGameWindow extends JFrame implements Node{
     }
 
     private void performAction(){
+        //Eh el function de?
         JOptionPane.showMessageDialog(null, "Game is starting!");
         setVisible(false);
         DifficultySelector difficultySelector = DifficultySelector.getDifficultySelector();
