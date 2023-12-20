@@ -2,17 +2,17 @@ package Frontend;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class DifficultySelector extends JFrame implements Node {
-    private JButton easyButton;
-    private JButton mediumButton;
-    private JButton hardButton;
 
-    private JButton backButton;
+    static DifficultySelector difficultySelector = null;
 
     private Node parent;
 
-    public DifficultySelector() {
+    private DifficultySelector() {
         setTitle("Difficulty");
         setResizable(false);
         setSize(500, 480);
@@ -22,31 +22,27 @@ public class DifficultySelector extends JFrame implements Node {
         JLabel backgroundLabel = new JLabel(backgroundIcon);
         add(backgroundLabel, BorderLayout.CENTER);
         backgroundLabel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 50)); // Added gaps
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                getBack(evt);
-            }
-        });
-        easyButton = CommonUsedUtils.createStyledButton("Easy",(Void) -> {
+
+        JButton easyButton = CommonUsedUtils.createStyledButton("Easy", (Void) -> {
             JOptionPane.showMessageDialog(null, "Easy Level Loaded!");
             return null;
         });
 
         backgroundLabel.add(easyButton);
 
-        mediumButton = CommonUsedUtils.createStyledButton("Medium",(Void) -> {
+        JButton mediumButton = CommonUsedUtils.createStyledButton("Medium", (Void) -> {
             JOptionPane.showMessageDialog(null, "Medium Level Loaded!");
             return null;
         });
         backgroundLabel.add(mediumButton);
 
-        hardButton = CommonUsedUtils.createStyledButton("Hard",(Void) -> {
+        JButton hardButton = CommonUsedUtils.createStyledButton("Hard", (Void) -> {
             JOptionPane.showMessageDialog(null, "Hard Level Loaded!");
             return null;
         });
         backgroundLabel.add(hardButton);
 
-        backButton = CommonUsedUtils.createStyledButton("Back",(Void) -> {
+        JButton backButton = CommonUsedUtils.createStyledButton("Back", (Void) -> {
             getBack();
             return null;
         });
@@ -54,11 +50,13 @@ public class DifficultySelector extends JFrame implements Node {
         setVisible(true);
     }
 
-    private void getBack(){
-        setVisible(false);
-        ((JFrame)this.getParentNode()).setVisible(true);
+    public static DifficultySelector getDifficultySelector(){
+        if (difficultySelector == null)
+            difficultySelector =  new DifficultySelector();
+        return difficultySelector;
     }
-    private void getBack(java.awt.event.WindowEvent evt){
+
+    private void getBack(){
         setVisible(false);
         ((JFrame)this.getParentNode()).setVisible(true);
     }
