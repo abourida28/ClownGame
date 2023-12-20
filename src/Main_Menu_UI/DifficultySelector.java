@@ -25,7 +25,11 @@ public class DifficultySelector extends JFrame implements Node {
         JLabel backgroundLabel = new JLabel(backgroundIcon);
         add(backgroundLabel, BorderLayout.CENTER);
         backgroundLabel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 50)); // Added gaps
-
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                getBack(evt);
+            }
+        });
         easyButton = CommonUsedUtils.createStyledButton("Easy",(Void) -> {
             JOptionPane.showMessageDialog(null, "Easy Level Loaded!");
             return null;
@@ -54,6 +58,10 @@ public class DifficultySelector extends JFrame implements Node {
     }
 
     private void getBack(){
+        setVisible(false);
+        ((JFrame)this.getParentNode()).setVisible(true);
+    }
+    private void getBack(java.awt.event.WindowEvent evt){
         setVisible(false);
         ((JFrame)this.getParentNode()).setVisible(true);
     }
