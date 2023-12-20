@@ -24,7 +24,7 @@ public abstract class Worldimpl implements World {
             control.add(new Clown(screenWidth*5/11, screenHeight*i/8, 90, true, Color.BLUE));
         }
         for(int i=0;i<10;i++) {
-            moving.add(new Shape())
+            moving.add(new Shape());
         }
 
     }
