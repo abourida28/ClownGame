@@ -27,8 +27,9 @@ public class Clown implements GameObject {
         this.hearts = 3;
         this.balloons = new Stack<>();
         this.spriteImages = new BufferedImage[1];
+        //this.height=width;
         try {
-            spriteImages[0] = ImageIO.read(new File("images/Clown.png"));
+            spriteImages[0] = ImageIO.read(new File("images/robot.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

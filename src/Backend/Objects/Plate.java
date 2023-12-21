@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Plate extends AbstractShape{
-
+    private int color;
 
     public Plate(int posX, int posY,int difficulty) {
         super(posX,posY,getRandomColor(random(difficulty)));
@@ -48,10 +48,20 @@ public class Plate extends AbstractShape{
         }
     }
 
+
+
     @Override
     public AbstractShape createCopy() {
         AbstractShape copy = new Plate(getX(), getY(), 3);  // Pass appropriate parameters
         // Copy other properties as needed
         return copy;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

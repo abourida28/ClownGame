@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Square extends AbstractShape{
+    private int color;
 
     public Square(int posX, int posY,int difficulty) {
         super(posX,posY,getRandomColor(random(difficulty)));
@@ -32,19 +33,19 @@ public class Square extends AbstractShape{
     public static String getRandomColor(int rand) {
         // Hard difficulty (7 colors)
         if (rand == 0) {
-            return "images/blue_balloon.png";
+            return "images/blue_square.png";
         } else if (rand == 1) {
-            return "images/pink_balloon.png";
+            return "images/pink_square.png";
         } else if (rand == 2) {
-            return "images/purple_balloon.png";
+            return "images/purple_square.png";
         } else if (rand == 3) {
-            return "images/red_balloon.png";
+            return "images/red_square.png";
         } else if (rand == 4) {
-            return "images/yellow_balloon.png";
+            return "images/yellow_square.png";
         } else if (rand == 5) {
-            return "images/green_balloon.png";
+            return "images/green_square.png";
         } else {
-            return "images/orange_balloon.png";
+            return "images/orange_square.png";
         }
     }
 
@@ -53,5 +54,13 @@ public class Square extends AbstractShape{
         AbstractShape copy = new Square(getX(), getY(), 3);  // Pass appropriate parameters
         // Copy other properties as needed
         return copy;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }
