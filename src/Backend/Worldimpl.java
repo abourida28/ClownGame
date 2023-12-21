@@ -27,7 +27,7 @@ public class Worldimpl implements World {
         width = screenWidth;
         height = screenHeight;
         for(int i=0; i<2; i++) {
-            control.add(new Clown(width*5/11, height*i/8,  true, Color.BLUE));
+            control.add(new Clown(width*5/11, height*i/8,90,  true, Color.BLUE));
         }
         for(int i=0;i<10;i++) {
 //            RandomShapeGenerator randomShapeGenerator = new RandomShapeGenerator(DifficultyManager.getEasyDifficultyFactories());
@@ -39,20 +39,36 @@ public class Worldimpl implements World {
 
     }
     private boolean intersect(Shape s1, Clown s2){
-        return (Math.abs((s1.getX()+s1.getWidth()/2) - (s2.getX()+s2.getWidth()/2)) <= s1.getWidth()) && (Math.abs((s1.getY()+s1.getHeight()/2) - (s2.getY()+s2.getHeight()/2)) <= s1.getHeight());
-    }
+        double distanceX = (s1.getX() + s1.getWidth()/2.0 - (s2.getX() + s2.getWidth()/2.0));
+        double distanceY = s1.getY() + s1.getHeight()/2.0 - (s2.getY() + s2.getHeight()/2.0);
+        double actualDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+        return distanceX <= s1.getWidth()/2.0 + s2.getWidth()/2.0 && distanceY <=  s1.getHeight()/2.0 && actualDistance <= s1.getWidth()/2.0 + s2.getWidth()/2.0;    }
     @Override
     public boolean refresh()
     {
         boolean timeout = System.currentTimeMillis() - startTime > MAX_Time;
-        Clown Clown = (Backend.Objects.Clown) control.get(0);
-        for (GameObject fallObj : moving) {
-            Shape shape = (Shape) fallObj;
+        Clown clown = (Clown) control.get(0);
+        for (GameObject gameObject : moving) {
+            Shape shape = (Shape) gameObject;
             shape.fall(this);
-            if(!timeout && intersect((Shape) fallObj, Clown)){
-                score = Math.max(0, score+1);
-    }
+            if (!timeout && intersect(shape, clown)) {
+                score = Math.max(0, score + 1);
+                shape.setX(clown.getX());
+                clown.getBalloons().push(shape);
+                shape.setFallingSpeed(0);
+                shape.setY(clown.getY() - clown.getBalloons().size() * shape.getHeight()/2);
+
+                if(clown.getY()-clown.getBalloons().size()*shape.getHeight()>height){
+                    return false;
+                }
+            }
         }
+
+        // Update the x position of the balloons in the clown's stack
+        for (Shape balloon : clown.getBalloons()) {
+            balloon.setX(clown.getX());
+        }
+
         return !timeout;
     }
     @Override
