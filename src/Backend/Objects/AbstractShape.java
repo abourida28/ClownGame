@@ -16,10 +16,17 @@ public abstract class AbstractShape implements GameObject{
     private boolean visible;
     private int speed;
 
+    private boolean remove;
+
+    public boolean isRemove() {
+        return remove;
+    }
+
     public AbstractShape(int posX, int posY, String imagePath) {
         this.x = posX;
         this.y = posY;
         this.visible = true;
+        remove = false;
 
         try {
             spriteImages[0] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
@@ -33,8 +40,9 @@ public abstract class AbstractShape implements GameObject{
         this.setX(this.getX() + (Math.random() > 0.5 ? 1 : -1));
         if (this.getY() >= balloonWorld.getHeight()) {
             // Reuse the shape
-            this.setY(-1 * (int) (Math.random() * balloonWorld.getHeight()));
-            this.setX((int) (Math.random() * balloonWorld.getWidth()));
+//            this.setY(-1 * (int) (Math.random() * balloonWorld.getHeight()));
+//            this.setX((int) (Math.random() * balloonWorld.getWidth()));
+            remove = true;
         }
     }
 

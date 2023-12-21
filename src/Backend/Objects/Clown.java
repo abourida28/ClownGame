@@ -27,6 +27,7 @@ public class Clown implements GameObject {
         this.hearts = 3;
         this.balloons = new Stack<>();
         this.spriteImages = new BufferedImage[1];
+        this.height = width;
         try {
             spriteImages[0] = ImageIO.read(new File("images/Clown.png"));
         } catch (IOException e) {
@@ -58,6 +59,10 @@ public class Clown implements GameObject {
     }
     public boolean isCollision(GameObject o){
         return o.getY() + o.getHeight() >= this.getY() && o.getY() <= this.getY() + this.getHeight() && o.getX() + o.getWidth() >= this.getX() && o.getX() <= this.getX() + this.getWidth();
+    }
+    public GameObject getHighestBalloon()
+    {
+        return balloons.lastElement();
     }
     @Override
     public int getX() {

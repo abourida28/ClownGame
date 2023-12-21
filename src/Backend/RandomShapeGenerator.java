@@ -20,7 +20,7 @@ public class RandomShapeGenerator {
         this.speed = speed;
     }
 
-    public AbstractShape createRandomShape(int posX, int posY, int difficulty) {
+    public AbstractShape createRandomShape(int posX, int posY) {
         // Select a random factory and create a shape
         int randomIndex = new Random().nextInt(shapeFactoryArrayList.size());
         ShapeFactory selectedFactory = shapeFactoryArrayList.get(randomIndex);

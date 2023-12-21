@@ -9,6 +9,8 @@ import java.util.List;
 import Backend.Objects.Clown;
 import eg.edu.alexu.csd.oop.game.GameObject;
 
+import static java.lang.Math.abs;
+
 public class Worldimpl implements World {
 
     private int score = 0;
@@ -19,47 +21,67 @@ public class Worldimpl implements World {
     private final List<GameObject> moving = new LinkedList<GameObject>();
     private final List<GameObject> control = new LinkedList<GameObject>();
     private final List<GameObject> constants = new LinkedList<GameObject>();
-    private RandomShapeGenerator randomShapeGenerator;
+    private final RandomShapeGenerator randomShapeGenerator;
+    private int clock;
 
     public Worldimpl(int screenWidth,int screenHeight, RandomShapeGenerator randomShapeGenerator)
     {
+        clock = 0;
         this.randomShapeGenerator = randomShapeGenerator;
         width = screenWidth;
         height = screenHeight;
-        control.add(new Clown(width * 1/2, height * 17/21,70, true, Color.BLUE));
+        control.add(new Clown(width /2, height - 79,64, true, Color.BLUE));
         for(int i=0;i<10;i++) {
-//            RandomShapeGenerator randomShapeGenerator = new RandomShapeGenerator(DifficultyManager.getEasyDifficultyFactories());
             int posX = (int) (Math.random() * width);
             int posY = -1 * (int) (Math.random() * height);
-            AbstractShape randomShape = randomShapeGenerator.createRandomShape(posX, posY,1);
+            AbstractShape randomShape = randomShapeGenerator.createRandomShape(posX, posY);
             moving.add(randomShape);
         }
 
     }
-    private boolean intersect(AbstractShape s1, Clown s2){
+    private boolean intersect(GameObject s1, GameObject s2){
         double distanceX = (s1.getX() + s1.getWidth()/2.0 - (s2.getX() + s2.getWidth()/2.0));
         double distanceY = s1.getY() + s1.getHeight()/2.0 - (s2.getY() + s2.getHeight()/2.0);
         double actualDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
         return distanceX <= s1.getWidth()/2.0 + s2.getWidth()/2.0 && distanceY <=  s1.getHeight()/2.0 && actualDistance <= s1.getWidth()/2.0 + s2.getWidth()/2.0;    }
+
     @Override
     public boolean refresh()
     {
+        clock++;
+        if (clock == 20)
+        {
+            clock = 0;
+            int posX = (int) (Math.random() * width);
+            int posY = -1 * (int) (Math.random() * height);
+            AbstractShape randomShape = randomShapeGenerator.createRandomShape(posX, posY);
+            moving.add(randomShape);
+        }
+        List<GameObject> toBeRemoved = new LinkedList<GameObject>();
         boolean timeout = System.currentTimeMillis() - startTime > MAX_Time;
         Clown clown = (Clown) control.get(0);
         for (GameObject gameObject : moving) {
             AbstractShape shape = (AbstractShape) gameObject;
             shape.fall(this);
+            if (shape.isRemove()) {
+                toBeRemoved.add(shape);
+            }
             if (!timeout && intersect(shape, clown)) {
-                score = Math.max(0, score + 1);
+                score = score + 1;
                 shape.setX(clown.getX());
                 clown.getBalloons().push(shape);
                 shape.setFallingSpeed(0);
-                shape.setY(clown.getY() - clown.getBalloons().size() * shape.getHeight()/2);
+                shape.setY(shape.getY() - shape.getHeight() / 2);
 
                 if(clown.getY()-clown.getBalloons().size()*shape.getHeight()>height){
                     return false;
                 }
             }
+        }
+
+        for (GameObject object : toBeRemoved)
+        {
+            moving.remove(object);
         }
 
         // Update the x position of the balloons in the clown's stack
@@ -69,6 +91,7 @@ public class Worldimpl implements World {
 
         return !timeout;
     }
+
     @Override
     public int getSpeed() {
         return 7;

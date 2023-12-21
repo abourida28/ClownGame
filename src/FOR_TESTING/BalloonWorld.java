@@ -1,10 +1,8 @@
 package FOR_TESTING;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import Backend.Difficulty;
 import Backend.Objects.AbstractShape;
 import Backend.Objects.Clown;
 import Backend.RandomShapeGenerator;
@@ -43,7 +41,7 @@ public class BalloonWorld implements World {
             randomShapeGenerator.addFactory(new PlateFactory());
             int posX = (int) (Math.random() * screenWidth);
             int posY = -1 * (int) (Math.random() * screenHeight);
-            AbstractShape randomShape = randomShapeGenerator.createRandomShape(posX, posY,1);
+            AbstractShape randomShape = randomShapeGenerator.createRandomShape(posX, posY);
             moving.add(randomShape);
         }
         for(int i=0; i<1; i++)

@@ -30,15 +30,22 @@ public class WorldBuilder {
         return this;
     }
     public WorldBuilder withKnife() {
-        randomShapeGenerator.addFactory(new KnifeFactory());
+        for (int i = 0; i < 2; i++) {
+            randomShapeGenerator.addFactory(new KnifeFactory());
+        }
         return this;
     }
     public WorldBuilder withPlates() {
-        randomShapeGenerator.addFactory(new PlateFactory());
+        for (int i = 0; i < 5; i++) {
+            randomShapeGenerator.addFactory(new PlateFactory());
+        }
         return this;
     }
     public WorldBuilder withSquares() {
-        randomShapeGenerator.addFactory(new SquareFactory());
+
+        for (int i = 0; i < 5; i++) {
+            randomShapeGenerator.addFactory(new SquareFactory());
+        }
         return this;
     }
     public World build()
