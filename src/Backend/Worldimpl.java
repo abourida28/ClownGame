@@ -19,6 +19,7 @@ public class Worldimpl implements World {
     private long endTime, startTime = System.currentTimeMillis();
     private final List<GameObject> moving = new LinkedList<GameObject>();
     private final List<GameObject> control = new LinkedList<GameObject>();
+    private final List<GameObject> constants = new LinkedList<GameObject>();
     private RandomShapeGenerator randomShapeGenerator;
 
     public Worldimpl(int screenWidth,int screenHeight, RandomShapeGenerator randomShapeGenerator)
@@ -26,9 +27,7 @@ public class Worldimpl implements World {
         this.randomShapeGenerator = randomShapeGenerator;
         width = screenWidth;
         height = screenHeight;
-        for(int i=0; i<2; i++) {
-            control.add(new Clown(width*5/11, height*i/8,90,  true, Color.BLUE));
-        }
+        control.add(new Clown(width * 1/2, height * 17/21,70, true, Color.BLUE));
         for(int i=0;i<10;i++) {
 //            RandomShapeGenerator randomShapeGenerator = new RandomShapeGenerator(DifficultyManager.getEasyDifficultyFactories());
             int posX = (int) (Math.random() * width);
@@ -82,7 +81,7 @@ public class Worldimpl implements World {
 
     @Override
     public List<GameObject> getConstantObjects() {
-        return null;
+        return constants;
     }
     @Override
     public List<GameObject> getMovableObjects() {

@@ -34,7 +34,7 @@ public class mainMenuWindow extends JFrame implements Node{
 
     private void performAction(){
         //Eh el function de?
-        JOptionPane.showMessageDialog(null, "Game is starting!");
+//        JOptionPane.showMessageDialog(null, "Game is starting!");
         setVisible(false);
         DifficultySelector difficultySelector = DifficultySelector.getDifficultySelector();
         difficultySelector.setVisible(true);

@@ -30,7 +30,7 @@ public class DifficultySelector extends JFrame implements Node {
 
         JButton easyButton = CommonUsedUtils.createStyledButton("Easy", (Void) -> {
             Difficulty difficulty = new Easy();
-            JOptionPane.showMessageDialog(null, "Easy Level Loaded!");
+//            JOptionPane.showMessageDialog(null, "Easy Level Loaded!");
             ClownGameScreen clownGameScreen = new ClownGameScreen(difficulty);
             return null;
         });
@@ -39,7 +39,7 @@ public class DifficultySelector extends JFrame implements Node {
 
         JButton mediumButton = CommonUsedUtils.createStyledButton("Medium", (Void) -> {
             Difficulty difficulty = new Medium();
-            JOptionPane.showMessageDialog(null, "Medium Level Loaded!");
+//            JOptionPane.showMessageDialog(null, "Medium Level Loaded!");
             ClownGameScreen clownGameScreen = new ClownGameScreen(difficulty);
             return null;
         });
