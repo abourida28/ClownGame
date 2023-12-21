@@ -25,7 +25,7 @@ public class Worldimpl implements World {
         width = screenWidth;
         height = screenHeight;
         for(int i=0; i<2; i++) {
-            control.add(new Clown(width*5/11, height*i/8,  true, Color.BLUE));
+            control.add(new Clown(width*5/11, height*i/8,90,  true, Color.BLUE));
         }
         for(int i=0;i<10;i++) {
             RandomShapeGenerator randomShapeGenerator = new RandomShapeGenerator(DifficultyManager.getEasyDifficultyFactories());
@@ -87,4 +87,4 @@ public class Worldimpl implements World {
         return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_Time - (System.currentTimeMillis()-startTime))/1000);
     }
 }
-}
+

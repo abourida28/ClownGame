@@ -8,4 +8,5 @@ public interface Shape extends GameObject {
     int getFallingSpeed();
     //Shape createShape();
     void setFallingSpeed(int speed);
+
 }

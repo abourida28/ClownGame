@@ -1,12 +1,15 @@
 package FOR_TESTING;
-
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
+import Backend.Objects.Clown;
 import Backend.Objects.Shape;
 import Backend.RandomShapeGenerator;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
+
+import static java.lang.Math.abs;
 
 public class BalloonWorld implements World {
 
@@ -39,22 +42,58 @@ public class BalloonWorld implements World {
             Shape randomShape = randomShapeGenerator.createRandomShape(posX, posY,1);
             moving.add(randomShape);
         }
+        for(int i=0; i<1; i++)
+            control.add(new Clown(width * 1/2, height * 17/21,70, true, Color.BLUE));
+
         // Add other initialization logic as needed
     }
 
-    @Override
-    public boolean refresh() {
-        boolean timeout = System.currentTimeMillis() - startTime > MAX_TIME;
-        for (GameObject object : moving) {
-            Shape shape = (Shape) object;
-            shape.fall(this);
-//            if(!timeout & intersect(object, clown)){
-//                score = Math.max(0, score+1);
-//            }
+//    @Override
+//    public boolean refresh() {
+//        boolean timeout = System.currentTimeMillis() - startTime > MAX_TIME;
+//        for (GameObject object : moving) {
+//            Shape shape = (Shape) object;
+//            shape.fall(this);
+////            if(!timeout & intersect(object, clown)){
+////                score = Math.max(0, score+1);
+////            }
+//        }
+//        return !timeout;  // Continue the game
+//    }
+
+@Override
+public boolean refresh()
+{
+    boolean timeout = System.currentTimeMillis() - startTime > MAX_TIME;
+    Clown clown = (Clown) control.get(0);
+    for (GameObject gameObject : moving) {
+        Shape shape = (Shape) gameObject;
+        shape.fall(this);
+        if (!timeout && intersect(shape, clown)) {
+            score = Math.max(0, score + 1);
+            shape.setX(clown.getX());
+            clown.getBalloons().push(shape);
+            shape.setFallingSpeed(0);
+            shape.setY(clown.getY() - clown.getBalloons().size() * shape.getHeight()/2);
+
+            if(clown.getY()-clown.getBalloons().size()*shape.getHeight()>height){
+                return false;
+            }
         }
-        return !timeout;  // Continue the game
     }
 
+    // Update the x position of the balloons in the clown's stack
+    for (Shape balloon : clown.getBalloons()) {
+        balloon.setX(clown.getX());
+    }
+
+    return !timeout;
+}
+    private boolean intersect(Shape s1, Clown s2){
+        double distanceX = (s1.getX() + s1.getWidth()/2.0 - (s2.getX() + s2.getWidth()/2.0));
+        double distanceY = s1.getY() + s1.getHeight()/2.0 - (s2.getY() + s2.getHeight()/2.0);
+        double actualDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+        return distanceX <= s1.getWidth()/2.0 + s2.getWidth()/2.0 && distanceY <=  s1.getHeight()/2.0 && actualDistance <= s1.getWidth()/2.0 + s2.getWidth()/2.0;    }
     @Override
     public List<GameObject> getConstantObjects() {
         return constant;
@@ -99,7 +138,7 @@ public class BalloonWorld implements World {
 
     // Helper method to check if two game objects intersect
     private boolean intersect(GameObject o1, Shape o2) {
-        return (Math.abs((o1.getX() + o1.getWidth() / 2) - (o2.getX() + o2.getWidth() / 2)) <= o1.getWidth() / 2 + o2.getWidth() / 2)
-                && (Math.abs((o1.getY() + o1.getHeight() / 2) - (o2.getY() + o2.getHeight() / 2)) <= o1.getHeight() / 2 + o2.getHeight() / 2);
+        return (abs((o1.getX() + o1.getWidth() / 2) - (o2.getX() + o2.getWidth() / 2)) <= o1.getWidth() / 2 + o2.getWidth() / 2)
+                && (abs((o1.getY() + o1.getHeight() / 2) - (o2.getY() + o2.getHeight() / 2)) <= o1.getHeight() / 2 + o2.getHeight() / 2);
     }
 }

@@ -5,10 +5,12 @@ import java.io.File;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import eg.edu.alexu.csd.oop.game.GameObject;
-
+import java.util.Stack;
 public class Clown implements GameObject {
     private int x;
     private int y;
+    private Stack<Shape> balloons;
+
     private int width;
     private int height;
     private boolean isVisible;
@@ -16,15 +18,17 @@ public class Clown implements GameObject {
     private BufferedImage[] spriteImages;
     private int hearts;
 
-    public Clown(int width, int height, boolean isVisible, Color color) {
+    public Clown(int posX,int posY,int width,  boolean isVisible, Color color) {
+        this.x = posX;
+        this.y = posY;
         this.width = width;
-        this.height = height;
         this.isVisible = isVisible;
         this.color = color;
         this.hearts = 3;
+        this.balloons = new Stack<>();
         this.spriteImages = new BufferedImage[1];
         try {
-            spriteImages[0] = ImageIO.read(new File("Clown.jpg"));
+            spriteImages[0] = ImageIO.read(new File("images/Clown.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,6 +41,9 @@ public class Clown implements GameObject {
         if(this.hearts==0)
             this.isVisible = false;
 
+    }
+    public Stack<Shape> getBalloons() {
+        return balloons;
     }
     public int getHearts(){
         return this.hearts;
@@ -69,6 +76,8 @@ public class Clown implements GameObject {
 
     @Override
     public void setY(int y) {
+        if(isVisible)
+            return;
         this.y = y;
     }
 
