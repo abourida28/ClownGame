@@ -8,9 +8,13 @@ import java.util.Random;
 
 public class RandomShapeGenerator {
     ArrayList<ShapeFactory> shapeFactoryArrayList;
-    public RandomShapeGenerator(ArrayList<ShapeFactory> arrayList){
-        shapeFactoryArrayList = arrayList;
+    public RandomShapeGenerator(){
+        shapeFactoryArrayList = new ArrayList<>();
     }
+    public void addFactory(ShapeFactory factory){
+        shapeFactoryArrayList.add(factory);
+    }
+
     public Shape createRandomShape(int posX, int posY, int difficulty) {
         // Select a random factory and create a shape
         int randomIndex = new Random().nextInt(shapeFactoryArrayList.size());

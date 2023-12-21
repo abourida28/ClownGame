@@ -19,16 +19,18 @@ public class Worldimpl implements World {
     private long endTime, startTime = System.currentTimeMillis();
     private final List<GameObject> moving = new LinkedList<GameObject>();
     private final List<GameObject> control = new LinkedList<GameObject>();
+    private RandomShapeGenerator randomShapeGenerator;
 
-    public Worldimpl(int screenWidth,int screenHeight)
+    public Worldimpl(int screenWidth,int screenHeight, RandomShapeGenerator randomShapeGenerator)
     {
+        this.randomShapeGenerator = randomShapeGenerator;
         width = screenWidth;
         height = screenHeight;
         for(int i=0; i<2; i++) {
-            control.add(new Clown(width*5/11, height*i/8,90,  true, Color.BLUE));
+            control.add(new Clown(width*5/11, height*i/8,  true, Color.BLUE));
         }
         for(int i=0;i<10;i++) {
-            RandomShapeGenerator randomShapeGenerator = new RandomShapeGenerator(DifficultyManager.getEasyDifficultyFactories());
+//            RandomShapeGenerator randomShapeGenerator = new RandomShapeGenerator(DifficultyManager.getEasyDifficultyFactories());
             int posX = (int) (Math.random() * width);
             int posY = -1 * (int) (Math.random() * height);
             Shape randomShape = randomShapeGenerator.createRandomShape(posX, posY,1);
@@ -87,4 +89,3 @@ public class Worldimpl implements World {
         return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_Time - (System.currentTimeMillis()-startTime))/1000);
     }
 }
-

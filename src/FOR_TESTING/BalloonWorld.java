@@ -36,11 +36,11 @@ public class BalloonWorld implements World {
 //            moving.add(plate2);
 //            moving.add(plate3);
             // Example usage
-            RandomShapeGenerator randomShapeGenerator = new RandomShapeGenerator(DifficultyManager.getEasyDifficultyFactories());
+//            RandomShapeGenerator randomShapeGenerator = new RandomShapeGenerator(DifficultyManager.getEasyDifficultyFactories());
             int posX = (int) (Math.random() * screenWidth);
             int posY = -1 * (int) (Math.random() * screenHeight);
-            Shape randomShape = randomShapeGenerator.createRandomShape(posX, posY,1);
-            moving.add(randomShape);
+//            Shape randomShape = randomShapeGenerator.createRandomShape(posX, posY,1);
+//            moving.add(randomShape);
         }
         for(int i=0; i<1; i++)
             control.add(new Clown(width * 1/2, height * 17/21,70, true, Color.BLUE));
