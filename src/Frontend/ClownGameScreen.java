@@ -19,7 +19,7 @@ public class ClownGameScreen implements Node{
     public ClownGameScreen(Difficulty difficulty) {
         this.difficulty = difficulty;
         JMenuBar menuBar = constructMenu();
-        this.gameController = GameEngine.start("Clown Game", difficulty.getWorld(500, 600), menuBar, Color.BLACK);
+        this.gameController = GameEngine.start("Clown Game", difficulty.getWorld(500, 600), menuBar);
     }
     private JMenuBar constructMenu()
     {
