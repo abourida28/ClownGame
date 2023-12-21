@@ -1,6 +1,6 @@
 package Backend;
 
-import Backend.Objects.Shape;
+import Backend.Objects.AbstractShape;
 import Backend.ShapeFactories.ShapeFactory;
 
 import java.util.ArrayList;
@@ -15,11 +15,11 @@ public class RandomShapeGenerator {
         shapeFactoryArrayList.add(factory);
     }
 
-    public Shape createRandomShape(int posX, int posY, int difficulty) {
+    public AbstractShape createRandomShape(int posX, int posY, int difficulty) {
         // Select a random factory and create a shape
         int randomIndex = new Random().nextInt(shapeFactoryArrayList.size());
         ShapeFactory selectedFactory = shapeFactoryArrayList.get(randomIndex);
-        Shape shape = selectedFactory.createShape(posX,posY,difficulty);
+        AbstractShape shape = selectedFactory.createShape(posX,posY,difficulty);
         shape.setFallingSpeed(difficulty);
         return shape;
     }

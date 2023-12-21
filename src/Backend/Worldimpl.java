@@ -1,7 +1,6 @@
 package Backend;
 
-import Backend.Objects.Shape;
-import FOR_TESTING.DifficultyManager;
+import Backend.Objects.AbstractShape;
 import eg.edu.alexu.csd.oop.game.World;
 
 import java.awt.*;
@@ -33,12 +32,12 @@ public class Worldimpl implements World {
 //            RandomShapeGenerator randomShapeGenerator = new RandomShapeGenerator(DifficultyManager.getEasyDifficultyFactories());
             int posX = (int) (Math.random() * width);
             int posY = -1 * (int) (Math.random() * height);
-            Shape randomShape = randomShapeGenerator.createRandomShape(posX, posY,1);
+            AbstractShape randomShape = randomShapeGenerator.createRandomShape(posX, posY,1);
             moving.add(randomShape);
         }
 
     }
-    private boolean intersect(Shape s1, Clown s2){
+    private boolean intersect(AbstractShape s1, Clown s2){
         double distanceX = (s1.getX() + s1.getWidth()/2.0 - (s2.getX() + s2.getWidth()/2.0));
         double distanceY = s1.getY() + s1.getHeight()/2.0 - (s2.getY() + s2.getHeight()/2.0);
         double actualDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
@@ -49,7 +48,7 @@ public class Worldimpl implements World {
         boolean timeout = System.currentTimeMillis() - startTime > MAX_Time;
         Clown clown = (Clown) control.get(0);
         for (GameObject gameObject : moving) {
-            Shape shape = (Shape) gameObject;
+            AbstractShape shape = (AbstractShape) gameObject;
             shape.fall(this);
             if (!timeout && intersect(shape, clown)) {
                 score = Math.max(0, score + 1);
@@ -65,7 +64,7 @@ public class Worldimpl implements World {
         }
 
         // Update the x position of the balloons in the clown's stack
-        for (Shape balloon : clown.getBalloons()) {
+        for (AbstractShape balloon : clown.getBalloons()) {
             balloon.setX(clown.getX());
         }
 

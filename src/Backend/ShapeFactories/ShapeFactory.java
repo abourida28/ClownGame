@@ -1,10 +1,10 @@
 package Backend.ShapeFactories;
 
-import Backend.Objects.Shape;
+import Backend.Objects.AbstractShape;
 
 public interface ShapeFactory {
-    Shape createShape(int Posx, int Posy);
+    AbstractShape createShape(int Posx, int Posy);
 
-    Shape createShape(int Posx,int Posy,int difficulty);
+    AbstractShape createShape(int Posx,int Posy,int difficulty);
 
 }

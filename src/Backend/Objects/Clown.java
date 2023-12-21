@@ -9,7 +9,7 @@ import java.util.Stack;
 public class Clown implements GameObject {
     private int x;
     private int y;
-    private Stack<Shape> balloons;
+    private Stack<AbstractShape> balloons;
 
     private int width;
     private int height;
@@ -42,7 +42,7 @@ public class Clown implements GameObject {
             this.isVisible = false;
 
     }
-    public Stack<Shape> getBalloons() {
+    public Stack<AbstractShape> getBalloons() {
         return balloons;
     }
     public int getHearts(){
