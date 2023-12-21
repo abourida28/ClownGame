@@ -15,6 +15,11 @@ public class WorldBuilder {
         this.screenHeight = screenHeight;
     }
 
+    public WorldBuilder setSpeed(int speed){
+        randomShapeGenerator.setSpeed(speed);
+        return this;
+    }
+
     public WorldBuilder withBombs() {
         randomShapeGenerator.addFactory(new BombFactory());
         return this;

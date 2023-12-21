@@ -12,7 +12,7 @@ public class Medium implements Difficulty {
 
     @Override
     public int getShapeSpeed() {
-        return 0;
+        return 6;
     }
     @Override
     public World getWorld(int screenWidth, int screenHeight) {
@@ -21,8 +21,8 @@ public class Medium implements Difficulty {
                 .withPlates()
                 .withHearts()
                 .withKnife()
-                .withBombs()
                 .withSquares()
+                .setSpeed(4)
                 .build();
     }
 }

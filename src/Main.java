@@ -1,6 +1,11 @@
+import Backend.Difficulty;
+import Backend.Levels.Easy;
+import Backend.Levels.Hard;
+import Backend.Levels.Medium;
 import FOR_TESTING.BalloonWorld;
 import Frontend.mainMenuWindow;
 import eg.edu.alexu.csd.oop.game.GameEngine;
+import eg.edu.alexu.csd.oop.game.World;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -23,9 +28,10 @@ public class Main {
         menu.add(pauseMenuItem);
         menu.add(resumeMenuItem);
         menuBar.add(menu);
-
+        Difficulty difficulty = new Hard();
+        World world = difficulty.getWorld(800,500);
         final GameEngine.GameController gameController = GameEngine.start(
-                "Clown Game", new BalloonWorld(800, 500),menuBar);
+                "Clown Game", world,menuBar);
 
         newMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

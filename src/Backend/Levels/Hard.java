@@ -12,7 +12,7 @@ public class Hard implements Difficulty {
 
     @Override
     public int getShapeSpeed() {
-        return 0;
+        return 4;
     }
 
     @Override
@@ -23,6 +23,7 @@ public class Hard implements Difficulty {
                 .withKnife()
                 .withBombs()
                 .withSquares()
+                .setSpeed(6)
                 .build();
     }
 }

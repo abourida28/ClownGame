@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import Backend.Difficulty;
 import Backend.Objects.AbstractShape;
 import Backend.Objects.Clown;
 import Backend.RandomShapeGenerator;

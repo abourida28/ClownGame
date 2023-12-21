@@ -13,17 +13,17 @@ public class Easy implements Difficulty {
 
     @Override
     public int getShapeSpeed() {
-        return 0;
+        return 2;
     }
 
     @Override
     public World getWorld(int screenWidth, int screenHeight) {
         WorldBuilder worldBuilder = new WorldBuilder(screenWidth, screenHeight);
         return worldBuilder
-                .withKnife()
                 .withHearts()
                 .withPlates()
                 .withSquares()
+                .setSpeed(2)
                 .build();
     }
 }
