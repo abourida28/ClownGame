@@ -11,18 +11,15 @@ import javax.swing.JMenuItem;
 import Backend.Difficulty;
 import eg.edu.alexu.csd.oop.game.GameEngine;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
-import Backend.Worldimpl;
 
-public class clownGameScreen implements Node{
+public class ClownGameScreen implements Node{
     private Node parent;
     private GameController gameController;
     private Difficulty difficulty;//TODO difficulty should be passed to world impl not be stored in clownGameScreen
-    public clownGameScreen(Difficulty difficulty) {
+    public ClownGameScreen(Difficulty difficulty) {
         this.difficulty = difficulty;
         JMenuBar menuBar = constructMenu();
-        //TODO make world using builder
-        this.gameController = GameEngine.start("Very Simple Game in 99 Line of Code", new Worldimpl(500, 600), menuBar, Color.BLACK);
-
+        this.gameController = GameEngine.start("Clown Game", difficulty.getWorld(500, 600), menuBar, Color.BLACK);
     }
     private JMenuBar constructMenu()
     {

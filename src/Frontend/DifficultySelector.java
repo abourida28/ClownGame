@@ -1,5 +1,10 @@
 package Frontend;
 
+import Backend.Difficulty;
+import Backend.Levels.Easy;
+import Backend.Levels.Hard;
+import Backend.Levels.Medium;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,20 +29,26 @@ public class DifficultySelector extends JFrame implements Node {
         backgroundLabel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 50)); // Added gaps
 
         JButton easyButton = CommonUsedUtils.createStyledButton("Easy", (Void) -> {
+            Difficulty difficulty = new Easy();
             JOptionPane.showMessageDialog(null, "Easy Level Loaded!");
+            ClownGameScreen clownGameScreen = new ClownGameScreen(difficulty);
             return null;
         });
 
         backgroundLabel.add(easyButton);
 
         JButton mediumButton = CommonUsedUtils.createStyledButton("Medium", (Void) -> {
+            Difficulty difficulty = new Medium();
             JOptionPane.showMessageDialog(null, "Medium Level Loaded!");
+            ClownGameScreen clownGameScreen = new ClownGameScreen(difficulty);
             return null;
         });
         backgroundLabel.add(mediumButton);
 
         JButton hardButton = CommonUsedUtils.createStyledButton("Hard", (Void) -> {
+            Difficulty difficulty = new Hard();
             JOptionPane.showMessageDialog(null, "Hard Level Loaded!");
+            ClownGameScreen clownGameScreen = new ClownGameScreen(difficulty);
             return null;
         });
         backgroundLabel.add(hardButton);
