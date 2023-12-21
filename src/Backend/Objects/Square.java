@@ -20,11 +20,11 @@ public class Square extends AbstractShape{
     {
         switch(difficulty)
         {
-            case 1:
-                return new Random().nextInt(3);
             case 2:
+                return new Random().nextInt(3);
+            case 4:
                 return new Random().nextInt(5);
-            case 3:
+            case 6:
                 return new Random().nextInt(7);
             default:
                 return 0;
