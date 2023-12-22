@@ -8,14 +8,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Heart extends AbstractShape{
-
-
     public Heart(int posX, int posY) {
         super(posX,posY,"images/heart.png");
-    }
-
-    @Override
-    public AbstractShape createCopy() {
-        return null;
     }
 }

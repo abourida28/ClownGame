@@ -1,8 +1,6 @@
 package Backend.Objects;
-
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -17,10 +15,6 @@ public abstract class AbstractShape implements GameObject{
     private int speed;
 
     private boolean remove;
-
-    public boolean isRemove() {
-        return remove;
-    }
 
     public AbstractShape(int posX, int posY, String imagePath) {
         this.x = posX;
@@ -39,9 +33,6 @@ public abstract class AbstractShape implements GameObject{
         this.setY((this.getY() + getFallingSpeed()));
         this.setX(this.getX() + (Math.random() > 0.5 ? 1 : -1));
         if (this.getY() >= balloonWorld.getHeight()) {
-            // Reuse the shape
-//            this.setY(-1 * (int) (Math.random() * balloonWorld.getHeight()));
-//            this.setX((int) (Math.random() * balloonWorld.getWidth()));
             remove = true;
         }
     }
@@ -99,8 +90,6 @@ public abstract class AbstractShape implements GameObject{
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
-
-    public abstract AbstractShape createCopy();
 
 }
 

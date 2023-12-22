@@ -57,9 +57,18 @@ public class Clown implements GameObject {
     public void decreaseHearts(){
         if(this.hearts>0)
             this.hearts--;
-        if(this.hearts==0)
-            this.isVisible = false;
-
+        if(this.hearts==0){
+            invisibleToggle();
+        }
+    }
+    private void invisibleToggle(){
+        this.isVisible = false;
+        for(AbstractShape s:getLeftHand()){
+            s.setVisible(false);
+        }
+        for(AbstractShape s:getRightHand()){
+            s.setVisible(false);
+        }
     }
     public Stack<AbstractShape> getBalloons() {
         return balloons;
@@ -73,7 +82,7 @@ public class Clown implements GameObject {
     }
     public void removeHearts(){
         this.hearts = 0;
-        this.isVisible = false;
+        invisibleToggle();
     }
     public boolean isCollision(GameObject o){
         return o.getY() + o.getHeight() >= this.getY() && o.getY() <= this.getY() + this.getHeight() && o.getX() + o.getWidth() >= this.getX() && o.getX() <= this.getX() + this.getWidth();

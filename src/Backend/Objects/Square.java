@@ -69,18 +69,9 @@ public class Square  extends AbstractShape implements Collectable{
         else
             return 6;
     }
-    @Override
-    public AbstractShape createCopy() {
-        AbstractShape copy = new Square(getX(), getY(), 3);  // Pass appropriate parameters
-        // Copy other properties as needed
-        return copy;
-    }
 
     public int getColor() {
         return color;
     }
 
-    public void setColor(int color) {
-        this.color = color;
-    }
 }

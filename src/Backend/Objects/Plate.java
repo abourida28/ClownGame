@@ -13,7 +13,6 @@ public class Plate extends AbstractShape implements Collectable{
 
     public Plate(int posX, int posY,int difficulty) {
         this(posX,posY,getRandomColor(random(difficulty)));
-
     }
     private Plate(int posX, int posY, String imagePath) {
         super(posX, posY, imagePath);
@@ -70,19 +69,8 @@ public class Plate extends AbstractShape implements Collectable{
             return 6;
     }
 
-
-    @Override
-    public AbstractShape createCopy() {
-        AbstractShape copy = new Plate(getX(), getY(), 3);  // Pass appropriate parameters
-        // Copy other properties as needed
-        return copy;
-    }
-
     public int getColor() {
         return color;
     }
 
-    public void setColor(int color) {
-        this.color = color;
-    }
 }
