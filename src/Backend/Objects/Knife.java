@@ -7,18 +7,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Knife extends AbstractShape implements Collectable{
+public class Knife extends AbstractShape {
     public Knife(int posX, int posY) {
         super(posX, posY, "images/knife.png");
     }
 
-    @Override
-    public int getColor() {
-        return -1;
-    }
 
-    @Override
-    public int getColorFromPath(String path) {
-        return 0;
-    }
 }
