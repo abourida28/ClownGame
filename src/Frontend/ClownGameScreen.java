@@ -27,8 +27,6 @@ public class ClownGameScreen implements Node{
         JMenu menu = new JMenu("File");
         JMenuItem pauseMenuItem = new JMenuItem("Pause");
         JMenuItem resumeMenuItem = new JMenuItem("Resume");
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        menu.add(exitMenuItem);
         menu.addSeparator();
         menu.add(pauseMenuItem);
         menu.add(resumeMenuItem);
@@ -41,12 +39,6 @@ public class ClownGameScreen implements Node{
         resumeMenuItem.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent e) {
                 gameController.resume();
-            }
-        });
-        exitMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
             }
         });
         return menuBar;
