@@ -1,6 +1,7 @@
 package Backend;
 
-import Backend.Objects.AbstractShape;
+import Backend.Objects.*;
+import Backend.Objects.Knife;
 import eg.edu.alexu.csd.oop.game.World;
 
 import java.awt.*;
@@ -48,6 +49,9 @@ public class Worldimpl implements World {
     @Override
     public boolean refresh()
     {
+//        Knife knife;
+//        Bomb bomb;
+//        Heart heart;
         clock++;
         if (clock == 20)
         {
@@ -67,11 +71,19 @@ public class Worldimpl implements World {
                 toBeRemoved.add(shape);
             }
             if (!timeout && intersect(shape, clown)) {
-                score = score + 1;
+                if(shape instanceof Knife) {
+                    clown.decreaseHearts();
+                }
+                else if (shape instanceof Bomb){
+                    clown.removeHearts();
+                } else if (shape instanceof Heart) {
+                    clown.increaseHearts();
+                }
+                else{score = score + 1;
                 shape.setX(clown.getX());
                 clown.getBalloons().push(shape);
                 shape.setFallingSpeed(0);
-                shape.setY(shape.getY() - shape.getHeight() / 2);
+                shape.setY(shape.getY() - shape.getHeight() / 2);}
 
                 if(clown.getY()-clown.getBalloons().size()*shape.getHeight()>height){
                     return false;
@@ -88,8 +100,9 @@ public class Worldimpl implements World {
         for (AbstractShape balloon : clown.getBalloons()) {
             balloon.setX(clown.getX());
         }
-
-        return !timeout;
+        if (!clown.isVisible())
+            timeout = true;
+        return (!timeout);
     }
 
     @Override
@@ -123,6 +136,7 @@ public class Worldimpl implements World {
     }
     @Override
     public String getStatus() {
+
         return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_Time - (System.currentTimeMillis()-startTime))/1000);
     }
 }
