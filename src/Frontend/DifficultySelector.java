@@ -72,6 +72,8 @@ public class DifficultySelector extends JFrame implements Node {
         ((JFrame)this.getParentNode()).setVisible(true);
     }
 
+
+
     @Override
     public void setParentNode(Node node) {
         this.parent = node;

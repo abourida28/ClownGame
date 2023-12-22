@@ -13,7 +13,7 @@ import eg.edu.alexu.csd.oop.game.GameEngine;
 import eg.edu.alexu.csd.oop.game.GameEngine.GameController;
 
 public class ClownGameScreen implements Node{
-    private Node parent;
+    private DifficultySelector parent;
     private GameController gameController;
     private Difficulty difficulty;//TODO difficulty should be passed to world impl not be stored in clownGameScreen
     public ClownGameScreen(Difficulty difficulty) {
@@ -28,9 +28,11 @@ public class ClownGameScreen implements Node{
         JMenuItem pauseMenuItem = new JMenuItem("Pause");
         JMenuItem resumeMenuItem = new JMenuItem("Resume");
         JMenuItem exitMenuItem = new JMenuItem("Exit");
+        menu.add(exitMenuItem);
         menu.addSeparator();
         menu.add(pauseMenuItem);
         menu.add(resumeMenuItem);
+        menuBar.add(menu);
         pauseMenuItem.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent e) {
                 gameController.pause();
