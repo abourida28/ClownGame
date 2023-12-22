@@ -8,11 +8,15 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
 
-public class Square extends AbstractShape{
+public class Square  extends AbstractShape implements Collectable{
     private int color;
 
     public Square(int posX, int posY,int difficulty) {
-        super(posX,posY,getRandomColor(random(difficulty)));
+        this(posX,posY,getRandomColor(random(difficulty)));
+    }
+    private Square(int posX, int posY, String imagePath) {
+        super(posX, posY, imagePath);
+        this.color = getColorFromPath(imagePath);
     }
 
 
@@ -48,7 +52,23 @@ public class Square extends AbstractShape{
             return "images/orange_square.png";
         }
     }
-
+    public int getColorFromPath(String path)
+    {
+        if(path.equals("images/blue_square.png"))
+            return 0;
+        else if(path.equals("images/pink_square.png"))
+            return 1;
+        else if(path.equals("images/purple_square.png"))
+            return 2;
+        else if(path.equals("images/red_square.png"))
+            return 3;
+        else if(path.equals("images/yellow_square.png"))
+            return 4;
+        else if(path.equals("images/green_square.png"))
+            return 5;
+        else
+            return 6;
+    }
     @Override
     public AbstractShape createCopy() {
         AbstractShape copy = new Square(getX(), getY(), 3);  // Pass appropriate parameters

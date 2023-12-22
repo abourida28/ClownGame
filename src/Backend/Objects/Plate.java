@@ -8,11 +8,16 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.Random;
 
-public class Plate extends AbstractShape{
+public class Plate extends AbstractShape implements Collectable{
     private int color;
 
     public Plate(int posX, int posY,int difficulty) {
-        super(posX,posY,getRandomColor(random(difficulty)));
+        this(posX,posY,getRandomColor(random(difficulty)));
+
+    }
+    private Plate(int posX, int posY, String imagePath) {
+        super(posX, posY, imagePath);
+        this.color = getColorFromPath(imagePath);
     }
 
     public static int random(int difficulty)
@@ -47,7 +52,23 @@ public class Plate extends AbstractShape{
             return "images/orange_balloon.png";
         }
     }
-
+    public int getColorFromPath(String path)
+    {
+        if(path.equals("images/blue_balloon.png"))
+            return 0;
+        else if(path.equals("images/pink_balloon.png"))
+            return 1;
+        else if(path.equals("images/purple_balloon.png"))
+            return 2;
+        else if(path.equals("images/red_balloon.png"))
+            return 3;
+        else if(path.equals("images/yellow_balloon.png"))
+            return 4;
+        else if(path.equals("images/green_balloon.png"))
+            return 5;
+        else
+            return 6;
+    }
 
 
     @Override

@@ -85,9 +85,7 @@ public class Worldimpl implements World {
     {
         if(s1.getFallingSpeed()==0)
             return false;
-        if(!(s1 instanceof Plate) && !(s1 instanceof Square)) {
-            return false;
-        }
+
         if(clownLeftRange(s1,s2))
         {
             if(s2.getLeftHand().isEmpty()) {
@@ -95,14 +93,18 @@ public class Worldimpl implements World {
                     if(s1 instanceof Knife)
                     {
                         s2.decreaseHearts();
+                        s1.setVisible(false);
                     }
                     else if(s1 instanceof Heart)
                     {
-                        s2.increaseHearts();
+                        if(s2.getHearts()<3)
+                            s2.increaseHearts();
+                        s1.setVisible(false);
                     }
                     else if(s1 instanceof Bomb)
                     {
                         s2.removeHearts();
+                        s1.setVisible(false);
                     }
                     else {
                         s2.addToLeftHand(s1);
@@ -119,14 +121,18 @@ public class Worldimpl implements World {
                 if(s1 instanceof Knife)
                 {
                     s2.decreaseHearts();
+                    s1.setVisible(false);
                 }
                 else if(s1 instanceof Heart)
                 {
-                    s2.increaseHearts();
+                    if(s2.getHearts()<3)
+                        s2.increaseHearts();
+                    s1.setVisible(false);
                 }
                 else if(s1 instanceof Bomb)
                 {
                     s2.removeHearts();
+                    s1.setVisible(false);
                 }
                 else{
                 s2.addToLeftHand(s1);
@@ -144,14 +150,18 @@ public class Worldimpl implements World {
                     if(s1 instanceof Knife)
                     {
                         s2.decreaseHearts();
+                        s1.setVisible(false);
                     }
                     else if(s1 instanceof Heart)
                     {
-                        s2.increaseHearts();
+                        if(s2.getHearts()<3)
+                            s2.increaseHearts();
+                        s1.setVisible(false);
                     }
                     else if(s1 instanceof Bomb)
                     {
                         s2.removeHearts();
+                        s1.setVisible(false);
                     }
                     else {
                         s2.addToRightHand(s1);
@@ -167,14 +177,18 @@ public class Worldimpl implements World {
                 if(s1 instanceof Knife)
                 {
                     s2.decreaseHearts();
+                    s1.setVisible(false);
                 }
                 else if(s1 instanceof Heart)
                 {
-                    s2.increaseHearts();
+                    if(s2.getHearts()<3)
+                        s2.increaseHearts();
+                    s1.setVisible(false);
                 }
                 else if(s1 instanceof Bomb)
                 {
                     s2.removeHearts();
+                    s1.setVisible(false);
                 }
                 else {
                 s2.addToRightHand(s1);
@@ -188,27 +202,49 @@ public class Worldimpl implements World {
         return false;
 
     }
-//    private boolean stackedThree(Clown clown)
-//    {
-//        if(clown.getLeftHand().size()>2)
-//        {
-//            AbstractShape s1 = clown.getLeftHand().pop();
-//            AbstractShape s2 = clown.getLeftHand().pop();
-//            AbstractShape s3 = clown.getLeftHand().pop();
-//
-//
-//            if(s1 instanceof Plate && s2 instanceof Plate && s3 instanceof Plate)
-//            {
-//                clown.getLeftHand().push(s3);
-//                clown.getLeftHand().push(s2);
-//                clown.getLeftHand().push(s1);
-//                return true;
-//            }
-//            clown.getLeftHand().push(s3);
-//            clown.getLeftHand().push(s2);
-//            clown.getLeftHand().push(s1);
-//        }
-//    }
+    private void stackedThree(Clown clown) {
+        Stack<AbstractShape> leftHand = clown.getLeftHand();
+        Stack<AbstractShape> rightHand = clown.getRightHand();
+        if (leftHand.size() >= 3) {
+            AbstractShape shape1 = leftHand.get(leftHand.size() - 1);
+            AbstractShape shape2 = leftHand.get(leftHand.size() - 2);
+            AbstractShape shape3 = leftHand.get(leftHand.size() - 3);
+            Collectable s1 = (Collectable) shape1;
+            Collectable s2 = (Collectable) shape2;
+            Collectable s3 = (Collectable) shape3;
+
+            if (s1.getColor() == s2.getColor() && s2.getColor() == s3.getColor()) {
+                leftHand.pop();
+                leftHand.pop();
+                leftHand.pop();
+                shape1.setVisible(false);
+                shape2.setVisible(false);
+                shape3.setVisible(false);
+
+
+                score += 3;
+            }
+        }
+        if (rightHand.size() >= 3) {
+            AbstractShape shape1 = rightHand.get(rightHand.size() - 1);
+            AbstractShape shape2 = rightHand.get(rightHand.size() - 2);
+            AbstractShape shape3 = rightHand.get(rightHand.size() - 3);
+            Collectable s1 = (Collectable) shape1;
+            Collectable s2 = (Collectable) shape2;
+            Collectable s3 = (Collectable) shape3;
+            if (s1.getColor() == s2.getColor() && s2.getColor() == s3.getColor()) {
+                rightHand.pop();
+                rightHand.pop();
+                rightHand.pop();
+                shape1.setVisible(false);
+                shape2.setVisible(false);
+                shape3.setVisible(false);
+
+
+                score += 3;
+            }
+        }
+    }
     @Override
     public boolean refresh()
     {
@@ -252,6 +288,13 @@ public class Worldimpl implements World {
             shape.setY(clown.getY() - i * shape.getHeight());
             i++;
         }
+        stackedThree(clown);
+        if(!clown.getRightHand().empty()&&clown.getRightHand().peek().getY()<0||!clown.getLeftHand().empty()&&clown.getLeftHand().peek().getY()<0f)
+        {
+            return false;
+        }
+        if(clown.getHearts()<=0)
+            return false;
 
         return !timeout;
     }
