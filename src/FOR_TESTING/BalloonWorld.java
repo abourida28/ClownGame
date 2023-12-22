@@ -14,7 +14,7 @@ import static java.lang.Math.abs;
 
 public class BalloonWorld implements World {
 
-    private static int MAX_TIME = 1 * 60 * 1000;
+    private static final int MAX_TIME = 1 * 60 * 1000;
     // 1 minute
     private int score = 0;
     private long startTime = System.currentTimeMillis();
@@ -58,15 +58,32 @@ public class BalloonWorld implements World {
         for (GameObject gameObject : moving) {
             AbstractShape shape = (AbstractShape) gameObject;
             shape.fall(this);
-            if (!timeout && intersect(shape, clown)) {
+            if (!timeout &&
+                intersect(shape, clown)) {
                 score = Math.max(0, score + 1);
-                shape.setX(clown.getX());
-                clown.getBalloons().push(shape);
-                shape.setFallingSpeed(0);
-                shape.setY(clown.getY() - clown.getBalloons().size() * shape.getHeight()/2);
-                if(clown.getY()-clown.getBalloons().size()*shape.getHeight()>height){
-                    return false;
+                if(intersectLeft(shape,clown)){
+                    clown.addToLeftHand(shape);
+                    shape.setFallingSpeed(0);
+                    shape.setX(clown.getX());
+                    shape.setY(clown.getY() - clown.getLeftHand().size() * shape.getHeight()/2);
+                    if(clown.getY()-clown.getLeftHand().size()*shape.getHeight()>height){
+                        return false;
+                    }
                 }
+                else{
+                    clown.addToRightHand(shape);
+                    shape.setFallingSpeed(0);
+                    shape.setX(clown.getX()+clown.getWidth());
+                    shape.setY(clown.getY() - clown.getRightHand().size() * shape.getHeight());
+                    if(clown.getY()-clown.getRightHand().size()*shape.getHeight()>height){
+                        return false;
+                    }
+                }
+
+//                clown.getBalloons().push(shape);
+//                shape.setFallingSpeed(0);
+
+
             }
         }
 
@@ -79,12 +96,30 @@ public class BalloonWorld implements World {
     }
 
 
+    private boolean intersectLeft(AbstractShape s1,Clown s2)
+    {
+        double distanceX = (s1.getX() + s1.getWidth()/2.0 - (s2.getX() + s2.getWidth()/2.0));
+        double distanceY = s1.getY() + s1.getHeight()/2.0 - (s2.getY() + s2.getHeight()/2.0);
+        double actualDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+        return distanceX <= s1.getWidth()/2.0 + s2.getWidth()/4.0 && distanceY <=  s1.getHeight()/2.0 && actualDistance <= s1.getWidth()/2.0 + s2.getWidth()/4.0;
+    }
 
     private boolean intersect(AbstractShape s1, Clown s2){
         double distanceX = (s1.getX() + s1.getWidth()/2.0 - (s2.getX() + s2.getWidth()/2.0));
         double distanceY = s1.getY() + s1.getHeight()/2.0 - (s2.getY() + s2.getHeight()/2.0);
         double actualDistance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-        return distanceX <= s1.getWidth()/2.0 + s2.getWidth()/2.0 && distanceY <=  s1.getHeight()/2.0 && actualDistance <= s1.getWidth()/2.0 + s2.getWidth()/2.0;    }
+
+        boolean intersectsLeftHand = distanceX <= s1.getWidth()/2.0 + s2.getWidth()/4.0 && distanceY <=  s1.getHeight()/2.0 && actualDistance <= s1.getWidth()/2.0 + s2.getWidth()/4.0;
+        boolean intersectsRightHand = distanceX <= s1.getWidth()/2.0 + 3*s2.getWidth()/4.0 && distanceY <=  s1.getHeight()/2.0 && actualDistance <= s1.getWidth()/2.0 + 3*s2.getWidth()/4.0;
+
+        if (intersectsLeftHand) {
+            s2.addToLeftHand(s1);
+        } else if (intersectsRightHand) {
+            s2.addToRightHand(s1);
+        }
+
+        return intersectsLeftHand || intersectsRightHand;
+    }
     @Override
     public List<GameObject> getConstantObjects() {
         return constant;

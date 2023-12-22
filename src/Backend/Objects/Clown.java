@@ -10,7 +10,8 @@ public class Clown implements GameObject {
     private int x;
     private int y;
     private Stack<AbstractShape> balloons;
-
+    private Stack<AbstractShape> leftHand;
+    private Stack<AbstractShape> rightHand;
     private int width;
     private int height;
     private boolean isVisible;
@@ -28,12 +29,29 @@ public class Clown implements GameObject {
         this.balloons = new Stack<>();
         this.spriteImages = new BufferedImage[1];
         this.height = width;
+        this.leftHand = new Stack<>();
+        this.rightHand = new Stack<>();
         try {
-            spriteImages[0] = ImageIO.read(new File("images/Clown.png"));
+            spriteImages[0] = ImageIO.read(new File("images/robot.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+        public Stack<AbstractShape> getLeftHand() {
+        return leftHand;
+    }
+
+    public Stack<AbstractShape> getRightHand() {
+        return rightHand;
+    }
+
+    public void addToLeftHand(AbstractShape shape) {
+        this.leftHand.push(shape);
+    }
+
+    public void addToRightHand(AbstractShape shape) {
+        this.rightHand.push(shape);
     }
 
     public void decreaseHearts(){
