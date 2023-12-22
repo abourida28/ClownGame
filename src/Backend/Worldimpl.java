@@ -251,8 +251,7 @@ public class Worldimpl implements World {
         for (GameObject gameObject : moving) {
             AbstractShape shape = (AbstractShape) gameObject;
             shape.fall(this);
-            if (!timeout &&
-            intersect(shape, clown)){
+            if (!timeout && intersect(shape, clown)){
                 score = Math.max(0, score + 1);
                 shape.setFallingSpeed(0);
             }
@@ -319,6 +318,6 @@ public class Worldimpl implements World {
     }
     @Override
     public String getStatus() {
-        return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_Time - (System.currentTimeMillis()-startTime))/1000);
+        return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_Time - (System.currentTimeMillis()-startTime))/1000)+ " | Lives = " + ((Clown) getControlableObjects().get(0)).getHearts();
     }
 }
