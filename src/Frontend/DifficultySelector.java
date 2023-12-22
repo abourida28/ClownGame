@@ -47,7 +47,7 @@ public class DifficultySelector extends JFrame implements Node {
 
         JButton hardButton = CommonUsedUtils.createStyledButton("Hard", (Void) -> {
             Difficulty difficulty = new Hard();
-            JOptionPane.showMessageDialog(null, "Hard Level Loaded!");
+//            JOptionPane.showMessageDialog(null, "Hard Level Loaded!");
             ClownGameScreen clownGameScreen = new ClownGameScreen(difficulty);
             return null;
         });
