@@ -288,13 +288,14 @@ public class Worldimpl implements World {
             shape.setY(clown.getY() - i * shape.getHeight());
             i++;
         }
+        if(clown.getHearts()<=0)
+            return false;
         stackedThree(clown);
         if(!clown.getRightHand().empty()&&clown.getRightHand().peek().getY()<0||!clown.getLeftHand().empty()&&clown.getLeftHand().peek().getY()<0f)
         {
             return false;
         }
-        if(clown.getHearts()<=0)
-            return false;
+
 
         return !timeout;
     }
