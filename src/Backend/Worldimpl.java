@@ -1,17 +1,11 @@
 package Backend;
-
 import Backend.Objects.*;
 import eg.edu.alexu.csd.oop.game.World;
-
-import java.util.Queue;
 import java.util.Stack;
 import java.awt.*;
 import java.util.LinkedList;
 import java.util.List;
-
 import eg.edu.alexu.csd.oop.game.GameObject;
-
-import static java.lang.Math.abs;
 
 public class Worldimpl implements World {
 
@@ -85,7 +79,6 @@ public class Worldimpl implements World {
     {
         if(s1.getFallingSpeed()==0)
             return false;
-
         if(clownLeftRange(s1,s2))
         {
             if(s2.getLeftHand().isEmpty()) {
@@ -212,7 +205,6 @@ public class Worldimpl implements World {
             Collectable s1 = (Collectable) shape1;
             Collectable s2 = (Collectable) shape2;
             Collectable s3 = (Collectable) shape3;
-
             if (s1.getColor() == s2.getColor() && s2.getColor() == s3.getColor()) {
                 leftHand.pop();
                 leftHand.pop();
@@ -220,8 +212,6 @@ public class Worldimpl implements World {
                 shape1.setVisible(false);
                 shape2.setVisible(false);
                 shape3.setVisible(false);
-
-
                 score += 3;
             }
         }
@@ -239,8 +229,6 @@ public class Worldimpl implements World {
                 shape1.setVisible(false);
                 shape2.setVisible(false);
                 shape3.setVisible(false);
-
-
                 score += 3;
             }
         }
@@ -264,10 +252,9 @@ public class Worldimpl implements World {
             AbstractShape shape = (AbstractShape) gameObject;
             shape.fall(this);
             if (!timeout &&
-            intersect(shape, clown) ){
+            intersect(shape, clown)){
                 score = Math.max(0, score + 1);
                 shape.setFallingSpeed(0);
-
             }
         }
         for (GameObject object : toBeRemoved)
@@ -288,15 +275,17 @@ public class Worldimpl implements World {
             shape.setY(clown.getY() - i * shape.getHeight());
             i++;
         }
-        if(clown.getHearts()<=0)
-            return false;
-        stackedThree(clown);
-        if(!clown.getRightHand().empty()&&clown.getRightHand().peek().getY()<0||!clown.getLeftHand().empty()&&clown.getLeftHand().peek().getY()<0f)
-        {
+        if(clown.getHearts()<=0) {
+            startTime = 0;
+            //moving.clear();
             return false;
         }
-
-
+        stackedThree(clown);
+        if(!clown.getRightHand().empty()&&clown.getRightHand().peek().getY()<0||!clown.getLeftHand().empty()&&clown.getLeftHand().peek().getY()<0)
+        {
+            startTime = 0;
+            return false;
+        }
         return !timeout;
     }
     @Override

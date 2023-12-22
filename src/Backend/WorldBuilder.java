@@ -4,8 +4,6 @@ import Backend.ShapeFactories.*;
 import eg.edu.alexu.csd.oop.game.World;
 
 public class WorldBuilder {
-
-    World world;
     RandomShapeGenerator randomShapeGenerator;
     int screenWidth;
     int screenHeight;
@@ -42,7 +40,6 @@ public class WorldBuilder {
         return this;
     }
     public WorldBuilder withSquares() {
-
         for (int i = 0; i < 5; i++) {
             randomShapeGenerator.addFactory(new SquareFactory());
         }
