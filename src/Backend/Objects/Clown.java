@@ -5,6 +5,8 @@ import java.io.File;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import eg.edu.alexu.csd.oop.game.GameObject;
+
+import java.util.Objects;
 import java.util.Stack;
 public class Clown implements GameObject {
     private int x;
@@ -32,7 +34,7 @@ public class Clown implements GameObject {
         this.leftHand = new Stack<>();
         this.rightHand = new Stack<>();
         try {
-            spriteImages[0] = ImageIO.read(new File("images/robot.png"));
+            spriteImages[0] = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("images/robot.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }

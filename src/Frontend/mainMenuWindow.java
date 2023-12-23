@@ -1,7 +1,10 @@
 package Frontend;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.Objects;
 
 public class mainMenuWindow extends JFrame implements Node{
 
@@ -12,7 +15,12 @@ public class mainMenuWindow extends JFrame implements Node{
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        ImageIcon backgroundIcon = new ImageIcon("images/circus_background.jpg");
+        ImageIcon backgroundIcon = null;
+        try {
+            backgroundIcon = new ImageIcon(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("Backgrounds/circus_background.jpg"))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         JLabel backgroundLabel = new JLabel(backgroundIcon);
         add(backgroundLabel, BorderLayout.CENTER);
         backgroundLabel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 100)); // Added gaps

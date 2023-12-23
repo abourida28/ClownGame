@@ -5,11 +5,14 @@ import Backend.Levels.Easy;
 import Backend.Levels.Hard;
 import Backend.Levels.Medium;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.util.Objects;
 
 public class DifficultySelector extends JFrame implements Node {
 
@@ -23,7 +26,12 @@ public class DifficultySelector extends JFrame implements Node {
         setSize(500, 480);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setLayout(new BorderLayout());
-        ImageIcon backgroundIcon = new ImageIcon("images/circus_background.jpg");
+        ImageIcon backgroundIcon = null;
+        try {
+            backgroundIcon = new ImageIcon(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("Backgrounds/circus_background.jpg"))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         JLabel backgroundLabel = new JLabel(backgroundIcon);
         add(backgroundLabel, BorderLayout.CENTER);
         backgroundLabel.setLayout(new FlowLayout(FlowLayout.CENTER, 200, 50)); // Added gaps
